@@ -31,5 +31,4 @@
   nix.settings = {
     auto-optimise-store = false;
   };
-  nixpkgs.hostPlatform = "aarch64-darwin";
 }

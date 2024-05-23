@@ -1,7 +1,6 @@
-{
-  config,
-  pkgs,
-  ...
+{ config
+, pkgs
+, ...
 }: {
   # Related Discussion: https://discourse.nixos.org/t/darwin-again/29331
   environment.systemPackages = with pkgs; [
@@ -55,12 +54,21 @@
     brews = [
       "curl" # do not install curl via nixpkgs, it's not working well on macOS!
       # "php"
-        # "goenv"
+      # "goenv"
       #"mackup"
       "yabai"
       "neovim"
       "skhd"
       "pyenv-virtualenv"
+      "tree"
+      "pyenv"
+      "autojump"
+      "nodejs"
+      "lsd"
+      "tmux"
+      "ripgrep"
+
+
     ];
 
     # `brew install --cask`
@@ -73,28 +81,28 @@
       "spotify"
       "slack"
 
-# Productivity
+      # Productivity
       "alfred"
       "karabiner-elements"
       "fantastical"
       "spaceid"
 
-# Messaging apps
+      # Messaging apps
       "signal"
       "telegram"
       "whatsapp"
 
-# Browsers
+      # Browsers
       "firefox"
       "google-chrome"
 
-# Development
+      # Development
       "alacritty"
       "iterm2"
       "vmware-fusion"
       "visual-studio-code"
 
-# Microsft Office
+      # Microsft Office
       "microsoft-excel"
       "microsoft-powerpoint"
       "microsoft-outlook"
