@@ -17,7 +17,16 @@
 
   nix.package = pkgs.nix;
 
-  programs.nix-index.enable = true;
+  # programs.nix-index.enable = true;
+
+  programs.zsh.enable = true;
+  programs.zsh.shellInit = ''
+    # Nix
+    if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+      . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+    fi
+    # End Nix
+    '';
 
   # do garbage collection weekly to keep disk usage low
   nix.gc = {

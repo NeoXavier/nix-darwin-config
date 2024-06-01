@@ -8,7 +8,7 @@ in
     ./core.nix
     ./git.nix
     ./alacritty.nix
-    # ./shell.nix
+    ./shell.nix
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -54,6 +54,7 @@ in
             yabai -m rule --add app="^Karabiner-Elements$" manage=off
             yabai -m rule --add app="^Whatsapp$" manage=off
             yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
+            yabai -m rule --add label="Finder" app="^Finder$" manage=off
             yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
         # yabai -m rule --add app="^$" manage=off
 

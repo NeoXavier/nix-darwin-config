@@ -53,22 +53,8 @@
     # `brew install`
     brews = [
       "curl" # do not install curl via nixpkgs, it's not working well on macOS!
-      # "php"
-      # "goenv"
-      #"mackup"
       "yabai"
       "neovim"
-      "skhd"
-      "pyenv-virtualenv"
-      "tree"
-      "pyenv"
-      "autojump"
-      "nodejs"
-      "lsd"
-      "tmux"
-      "ripgrep"
-
-
     ];
 
     # `brew install --cask`
