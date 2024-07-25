@@ -1,4 +1,15 @@
-{ pkgs, ... }: {
+{
+  pkgs,
+  inputs,
+  ...
+}: let
+  # Nixvim
+  nvimconfig = import ./nixvim;
+  nvim = inputs.nixvim.legacyPackages.aarch64-darwin.makeNixvimWithModule {
+    inherit pkgs;
+    module = nvimconfig;
+  };
+in {
   home.packages = with pkgs; [
     # archives
     zip
@@ -24,6 +35,7 @@
     autojump
     nodejs
 
+    nvim
   ];
 
   programs = {

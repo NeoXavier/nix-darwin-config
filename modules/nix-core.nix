@@ -1,10 +1,14 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: {
   # enable flakes globally
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings = {
+    experimental-features = ["nix-command" "flakes"];
+    nix-path = config.nix.nixPath;
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -26,7 +30,7 @@
       . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
     fi
     # End Nix
-    '';
+  '';
 
   # do garbage collection weekly to keep disk usage low
   nix.gc = {

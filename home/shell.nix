@@ -6,7 +6,7 @@
       enable = true;
       enableCompletion = true;
       completionInit = "autoload -U compinit && compinit\nsource ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh";
-      enableAutosuggestions = true;
+      autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
 
       plugins = [
@@ -61,7 +61,7 @@
 
       shellAliases = {
         yoink = "open -a Yoink";
-        vim = "nvim";
+        vim = "/etc/profiles/per-user/xavier/bin/nvim";
         vimrc = "nvim ~/.config/nvim";
         zshrc = "vim ~/.zshrc";
         rezsh = "exec zsh";
@@ -70,7 +70,7 @@
         tma = "tmux attach -t";
         tls = "tmux list-sessions";
         ts = "~/.local/bin/tmux-sessionizer";
-
+        yz = "yazi";
       };
     };
 
@@ -129,5 +129,6 @@
       nix-direnv.enable = true;
     };
 
+    yazi.enable = true;
   };
 }
