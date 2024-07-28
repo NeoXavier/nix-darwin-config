@@ -4,10 +4,10 @@
   ...
 }: let
   # Nixvim
-  nvimconfig = import ./nixvim;
-  nvim = inputs.nixvim.legacyPackages.aarch64-darwin.makeNixvimWithModule {
+  nixvimconfig = import ./nixvim;
+  nixvim = inputs.nixvim.legacyPackages.aarch64-darwin.makeNixvimWithModule {
     inherit pkgs;
-    module = nvimconfig;
+    module = nixvimconfig;
   };
 in {
   home.packages = with pkgs; [
@@ -35,7 +35,7 @@ in {
     autojump
     nodejs
 
-    nvim
+    # nixvim
   ];
 
   programs = {

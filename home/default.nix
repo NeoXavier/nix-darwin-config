@@ -1,8 +1,10 @@
-{ lib, inputs, ... }:
-let
-  user = "xavier";
-in
 {
+  lib,
+  inputs,
+  ...
+}: let
+  user = "xavier";
+in {
   # import sub modules
   imports = [
     # inputs.nixvim.homeManagerModules.nixvim
@@ -10,8 +12,8 @@ in
     ./git.nix
     ./alacritty.nix
     ./shell.nix
-  ]
-  ;
+    ./nvim.nix
+  ];
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -25,7 +27,7 @@ in
       target = ".config/yabai/yabairc";
       text = ''
           #!/usr/bin/env sh
-  
+
           # global settings
         yabai -m config layout bsp
 

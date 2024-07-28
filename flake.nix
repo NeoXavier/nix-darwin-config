@@ -24,39 +24,37 @@
     };
   };
 
-  outputs =
-    inputs @ { self
-    , nixpkgs
-    , darwin
-    , home-manager
-    , ...
-    }: {
-      darwinConfigurations =
-        let
-          user = "xavier";
-        in
-        {
-          "Xaviers-MacBook-Pro" = darwin.lib.darwinSystem {
-            system = "aarch64-darwin"; # change this to "aarch64-darwin" if you are using Apple Silicon
-            modules = [
-              ./modules/nix-core.nix
-              ./modules/apps.nix
-              # ./modules/system.nix
-              # ./modules/dock.nix
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    darwin,
+    home-manager,
+    ...
+  }: {
+    darwinConfigurations = let
+      user = "xavier";
+    in {
+      "Xaviers-MacBook-Pro" = darwin.lib.darwinSystem {
+        system = "aarch64-darwin"; # change this to "aarch64-darwin" if you are using Apple Silicon
+        modules = [
+          ./modules/nix-core.nix
+          ./modules/apps.nix
+          # ./modules/system.nix
+          # ./modules/dock.nix
 
-              # home manager
-              home-manager.darwinModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
+          # home manager
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
 
-                home-manager.extraSpecialArgs = {inherit inputs;};
-                home-manager.users.${user} = import ./home;
-              }
-            ];
-          };
-        };
-      # nix code formatter
-      formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.alejandra;
+            home-manager.extraSpecialArgs = {inherit inputs;};
+            home-manager.users.${user} = import ./home;
+          }
+        ];
+      };
     };
+    # nix code formatter
+    formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.alejandra;
+  };
 }

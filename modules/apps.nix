@@ -66,6 +66,7 @@
       "obsidian"
       "spotify"
       "slack"
+      "qmk-toolbox"
 
       # Productivity
       "alfred"
