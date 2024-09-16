@@ -21,7 +21,7 @@ return require('packer').startup(function(use)
     use('nvim-treesitter/playground')
     use('mbbill/undotree')
     use('tpope/vim-fugitive')
-    
+
     -- LSP Support
     use { 'neovim/nvim-lspconfig' }
     use { 'williamboman/mason.nvim' }

@@ -290,4 +290,8 @@
   plugins.vimtex = {
     enable = true;
   };
+
+  plugins.trouble = {
+    enable = true;
+  };
 }

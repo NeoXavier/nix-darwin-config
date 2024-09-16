@@ -1,7 +1,5 @@
-{ pkgs, ... }: {
-
+{pkgs, ...}: {
   programs = {
-
     zsh = {
       enable = true;
       enableCompletion = true;
@@ -39,7 +37,7 @@
         # eval "$(pyenv init --path)"
         # eval "$(pyenv virtualenv-init -)"
 
-        #if which pyenv-virtualenv-init > /dev/null; then 
+        #if which pyenv-virtualenv-init > /dev/null; then
         #eval "$(pyenv virtualenv-init -)";
         #fi
 
@@ -61,7 +59,8 @@
 
       shellAliases = {
         yoink = "open -a Yoink";
-        vim = "/etc/profiles/per-user/xavier/bin/nvim";
+        # vim = "/etc/profiles/per-user/xavier/bin/nvim";
+        vim = "/opt/homebrew/bin/nvim";
         vimrc = "nvim ~/.config/nvim";
         zshrc = "vim ~/.zshrc";
         rezsh = "exec zsh";

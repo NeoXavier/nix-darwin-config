@@ -53,8 +53,9 @@
     # `brew install`
     brews = [
       "curl" # do not install curl via nixpkgs, it's not working well on macOS!
-      "yabai"
       "neovim"
+      "qmk/qmk/qmk"
+      "watchman"
     ];
 
     # `brew install --cask`
@@ -73,6 +74,7 @@
       "karabiner-elements"
       "fantastical"
       "spaceid"
+      "nikitabobko/tap/aerospace"
 
       # Messaging apps
       "signal"

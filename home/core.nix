@@ -24,8 +24,8 @@ in {
     # gnused
     # gnutar
     # gawk
-    # gnupg
     # go
+    gnupg
     zsh-fzf-tab
     php
     alejandra
@@ -36,6 +36,8 @@ in {
     nodejs
 
     # nixvim
+
+    # node packages
   ];
 
   programs = {

@@ -93,6 +93,7 @@
       rustfmt
       shfmt
       stylua
+
       # Linters
       commitlint
       eslint_d
@@ -107,6 +108,7 @@
       shellcheck
       vale
       yamllint
+
       # Debuggers / misc deps
       # asm-lsp (not in aarch64-darwin yet)
       # bashdb
@@ -131,6 +133,8 @@
       # rr
       tmux-sessionizer
       zig
+
+      nodePackages.typescript-language-server
     ];
   };
 }
