@@ -33,11 +33,20 @@
 
 -- vim.cmd.colorscheme('gruvbox')
 
+return {
 -- Gruvbox Material
+    {
+        "sainnhe/gruvbox-material",
+        name = "gruvbox-material",
+        lazy = false,
+        config = function()
+            vim.g.gruvbox_material_better_performance = 1
+            vim.g.gruvbox_material_foreground = 'mix'
+            vim.g.gruvbox_material_background = 'hard'
+            vim.g.gruvbox_material_ui_contrast = 'high' -- The contrast of line numbers, indent lines, etc.
+            vim.cmd.colorscheme('gruvbox-material')
+        end,
+    },
+}
 
-vim.g.gruvbox_material_better_performance = 1
-vim.g.gruvbox_material_foreground = 'mix'
-vim.g.gruvbox_material_background = 'hard'
-vim.g.gruvbox_material_ui_contrast = 'high' -- The contrast of line numbers, indent lines, etc.
-vim.cmd.colorscheme('gruvbox-material')
 

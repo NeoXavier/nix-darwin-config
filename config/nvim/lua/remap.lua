@@ -63,10 +63,6 @@ vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
 
--- Trouble navigation
-vim.keymap.set("n", "]d", function() require("trouble").next({skip_groups = true, jump = true}) end)
-vim.keymap.set("n", "[d", function() require("trouble").previous({skip_groups = true, jump = true}) end)
-
 -- Symbols Outline
 vim.keymap.set("n", "<leader>so", vim.cmd.SymbolsOutline)
 
