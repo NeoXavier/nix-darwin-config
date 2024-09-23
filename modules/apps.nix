@@ -35,46 +35,49 @@
     masApps = {
       # TODO Feel free to add your favorite apps here.
 
-      OnepasswordSafari = 1569813296;
-      Things3 = 904280696;
-      FinalCutPro = 424389933;
-      iMovie = 408981434;
-      Notability = 360593530;
-      Xcode = 497799835;
+      #OnepasswordSafari = 1569813296;
+      #Things3 = 904280696;
+      #FinalCutPro = 424389933;
+      #iMovie = 408981434;
+      #Notability = 360593530;
+      #Xcode = 497799835;
     };
 
     taps = [
-      "homebrew/cask-fonts"
+      #"homebrew/cask-fonts"
       #"homebrew/services"
       #"homebrew/cask-versions"
       "koekeishiya/formulae" # yabai
+      "nikitabobko/tap"
     ];
 
     # `brew install`
     brews = [
       "curl" # do not install curl via nixpkgs, it's not working well on macOS!
       "neovim"
-      "qmk/qmk/qmk"
-      "watchman"
+      #"qmk/qmk/qmk"
+      #"watchman"
     ];
 
     # `brew install --cask`
     # TODO Feel free to add your favorite apps here.
     casks = [
+    	"font-jetbrains-mono-nerd-font"
       "1password"
       "1password-cli"
-      "setapp"
+      #"setapp"
       "obsidian"
       "spotify"
-      "slack"
-      "qmk-toolbox"
+      #"slack"
+      #"qmk-toolbox"
+        "protonvpn"
 
       # Productivity
       "alfred"
       "karabiner-elements"
       "fantastical"
       "spaceid"
-      "nikitabobko/tap/aerospace"
+      "aerospace"
 
       # Messaging apps
       "signal"
@@ -88,15 +91,15 @@
       # Development
       "alacritty"
       "iterm2"
-      "vmware-fusion"
+      #"vmware-fusion"
       "visual-studio-code"
 
       # Microsft Office
-      "microsoft-excel"
-      "microsoft-powerpoint"
-      "microsoft-outlook"
-      "microsoft-word"
-      "microsoft-onenote"
+      #"microsoft-excel"
+      #"microsoft-powerpoint"
+      #"microsoft-outlook"
+      #"microsoft-word"
+      #"microsoft-onenote"
     ];
   };
 }

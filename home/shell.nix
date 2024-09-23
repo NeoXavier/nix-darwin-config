@@ -7,28 +7,35 @@
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
 
-      plugins = [
+      /* plugins = [
         {
           name = "powerlevel10k";
           src = pkgs.zsh-powerlevel10k;
           file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
         }
-      ];
+      ]; */
 
-      initExtraFirst = ''
+      /* initExtraFirst = ''
         if [[ -r "$\{XDG_CACHE_HOME:-\$HOME/.cache\}/p10k-instant-prompt-$\{(%):-%n}.zsh" ]]; then
             source "$\{XDG_CACHE_HOME:-\$HOME/.cache\}/p10k-instant-prompt-$\{(%):-%n}.zsh"
                 fi
-      '';
+      ''; */
 
       initExtra = ''
+        #autojump
+        .  ${pkgs.autojump}/share/autojump/autojump.zsh
+
         #Shotcuts
         j() {
             cd "$(cat /Users/xavier/Library/autojump/autojump.txt | cut -f2 | sed 's|^/||' | fzf | sed 's|^|/|')"
         }
 
+        # Starship
+        eval "$(starship init zsh)"
+
+
         # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-        [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+        #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
         # PyEnv Configuration
         # export PATH="~/.pyenv/bin:$PATH" (for linux)
@@ -60,7 +67,7 @@
       shellAliases = {
         yoink = "open -a Yoink";
         # vim = "/etc/profiles/per-user/xavier/bin/nvim";
-        vim = "/opt/homebrew/bin/nvim";
+        vim = "/usr/local/bin/nvim";
         vimrc = "nvim ~/.config/nvim";
         zshrc = "vim ~/.zshrc";
         rezsh = "exec zsh";

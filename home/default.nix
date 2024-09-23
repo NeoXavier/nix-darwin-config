@@ -12,7 +12,8 @@ in {
     ./git.nix
     ./alacritty.nix
     ./shell.nix
-    # ./nvim.nix
+    ./nvim.nix
+    ./starship.nix
   ];
 
   # Home Manager needs a bit of information about you and the
