@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   programs = {
     zsh = {
       enable = true;
@@ -9,17 +9,23 @@
 
       /* plugins = [
         {
-          name = "powerlevel10k";
-          src = pkgs.zsh-powerlevel10k;
-          file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
         }
-      ]; */
+        ]; */
 
       /* initExtraFirst = ''
         if [[ -r "$\{XDG_CACHE_HOME:-\$HOME/.cache\}/p10k-instant-prompt-$\{(%):-%n}.zsh" ]]; then
-            source "$\{XDG_CACHE_HOME:-\$HOME/.cache\}/p10k-instant-prompt-$\{(%):-%n}.zsh"
-                fi
-      ''; */
+        source "$\{XDG_CACHE_HOME:-\$HOME/.cache\}/p10k-instant-prompt-$\{(%):-%n}.zsh"
+        fi
+        ''; */
+
+
+      # Homebrew path for Apple Silicon and Intel Macs
+      envExtra = ''
+        export PATH="$PATH:/opt/homebrew/bin:/usr/local/bin"
+      '';
 
       initExtra = ''
         #autojump
@@ -67,7 +73,7 @@
       shellAliases = {
         yoink = "open -a Yoink";
         # vim = "/etc/profiles/per-user/xavier/bin/nvim";
-        vim = "/usr/local/bin/nvim";
+        vim = "/opt/homebrew/bin/nvim";
         vimrc = "nvim ~/.config/nvim";
         zshrc = "vim ~/.zshrc";
         rezsh = "exec zsh";

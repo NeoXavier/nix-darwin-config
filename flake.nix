@@ -39,7 +39,7 @@
         modules = [
           ./modules/nix-core.nix
           ./modules/apps.nix
-          # ./modules/system.nix
+          ./modules/system.nix
           # ./modules/dock.nix
 
           # home manager
@@ -58,7 +58,7 @@
         modules = [
           ./modules/nix-core.nix
           ./modules/apps.nix
-          # ./modules/system.nix
+          ./modules/system.nix
           # ./modules/dock.nix
 
           # home manager

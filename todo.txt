@@ -1,5 +1,2 @@
-- Add env extra to zsh to export path to fix homebrew issue where the path is different for apple silicon and intel macs
-- Mac System settings
-    - Hot corners
-    - Dock settings
-- Starship gruvbox
+- delete aerospace.toml
+

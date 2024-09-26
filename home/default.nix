@@ -12,7 +12,7 @@ in {
     ./git.nix
     ./alacritty.nix
     ./shell.nix
-    ./nvim.nix
+    # ./nvim.nix
     ./starship.nix
   ];
 

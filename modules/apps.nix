@@ -49,28 +49,29 @@
       #"homebrew/cask-versions"
       "koekeishiya/formulae" # yabai
       "nikitabobko/tap"
+      "osx-cross/avr"
     ];
 
     # `brew install`
     brews = [
       "curl" # do not install curl via nixpkgs, it's not working well on macOS!
       "neovim"
-      #"qmk/qmk/qmk"
+      "qmk/qmk/qmk"
       #"watchman"
     ];
 
     # `brew install --cask`
     # TODO Feel free to add your favorite apps here.
     casks = [
-    	"font-jetbrains-mono-nerd-font"
+      "font-jetbrains-mono-nerd-font"
       "1password"
       "1password-cli"
-      #"setapp"
+      "setapp"
       "obsidian"
       "spotify"
-      #"slack"
-      #"qmk-toolbox"
-        "protonvpn"
+      "slack"
+      "qmk-toolbox"
+      "protonvpn"
 
       # Productivity
       "alfred"
@@ -91,15 +92,15 @@
       # Development
       "alacritty"
       "iterm2"
-      #"vmware-fusion"
+      "vmware-fusion"
       "visual-studio-code"
 
       # Microsft Office
-      #"microsoft-excel"
-      #"microsoft-powerpoint"
-      #"microsoft-outlook"
-      #"microsoft-word"
-      #"microsoft-onenote"
+      "microsoft-excel"
+      "microsoft-powerpoint"
+      "microsoft-outlook"
+      "microsoft-word"
+      "microsoft-onenote"
     ];
   };
 }

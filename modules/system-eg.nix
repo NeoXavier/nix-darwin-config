@@ -11,15 +11,72 @@
 ###################################################################################
 {
   system = {
-    # Introduced in c03f85f for macos Sequoia
-    stateVersion = 4;
     # activationScripts are executed every time you boot the system or run `nixos-rebuild` / `darwin-rebuild`.
     activationScripts.postUserActivation.text = ''
+      #https://superuser.com/questions/1211108/remove-osx-spotlight-keyboard-shortcut-from-command-line
+      # target output for AppleSymbolicHotKeys:64
+      #
+      # <key>64</key>
+      # <dict>
+      #   <key>enabled</key>
+      #   <false/>
+      #   <key>value</key>
+      #   <dict>
+      #     <key>parameters</key>
+      #     <array>
+      #       <integer>65535</integer>
+      #       <integer>49</integer>
+      #       <integer>1048576</integer>
+      #     </array>
+      #     <key>type</key>
+      #     <string>standard</string>
+      #   </dict>
+      # </dict>
+
+      /usr/libexec/PlistBuddy ~/Library/Preferences/com.apple.symbolichotkeys.plist \
+        -c "Delete :AppleSymbolicHotKeys:64" \
+        -c "Add :AppleSymbolicHotKeys:64:enabled bool false" \
+        -c "Add :AppleSymbolicHotKeys:64:value:parameters array" \
+        -c "Add :AppleSymbolicHotKeys:64:value:parameters: integer 65535" \
+        -c "Add :AppleSymbolicHotKeys:64:value:parameters: integer 49" \
+        -c "Add :AppleSymbolicHotKeys:64:value:parameters: integer 1048576" \
+        -c "Add :AppleSymbolicHotKeys:64:type string standard"
+
+      # target output for AppleSymbolicHotKeys:65
+      #
+      # <key>65</key>
+      # <dict>
+      #   <key>enabled</key>
+      #   <false/>
+      #   <key>value</key>
+      #   <dict>
+      #     <key>parameters</key>
+      #     <array>
+      #       <integer>65535</integer>
+      #       <integer>49</integer>
+      #       <integer>1572864</integer>
+      #     </array>
+      #     <key>type</key>
+      #     <string>standard</string>
+      #   </dict>
+      # </dict>
+
+      /usr/libexec/PlistBuddy ~/Library/Preferences/com.apple.symbolichotkeys.plist \
+        -c "Delete :AppleSymbolicHotKeys:65" \
+        -c "Add :AppleSymbolicHotKeys:65:enabled bool false" \
+        -c "Add :AppleSymbolicHotKeys:65:value:parameters array" \
+        -c "Add :AppleSymbolicHotKeys:65:value:parameters: integer 65535" \
+        -c "Add :AppleSymbolicHotKeys:65:value:parameters: integer 49" \
+        -c "Add :AppleSymbolicHotKeys:65:value:parameters: integer 1572864" \
+        -c "Add :AppleSymbolicHotKeys:65:type string standard"
+      defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
+      # activateSettings -u will reload the settings from the database and apply them to the current session,
+      # so we do not need to logout and login again to make the changes take effect.
+      /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
     '';
 
     defaults = {
-
-      menuExtraClock.IsAnalog = false; # Show an analog clock instead of a digital one
+      menuExtraClock.IsAnalog = true; # Show an analog clock instead of a digital one
 
       # customize dock
       dock = {
@@ -36,7 +93,6 @@
         autohide = true;
         #autohide-time-modifier = 1000.0;
         enable-spring-load-actions-on-all-items = true;
-        wvous-tr-corner = 10; # top right corner (Hot Corners)
       };
 
       # finder
@@ -54,7 +110,7 @@
 
       # trackpad
       trackpad = {
-        # Clicking = true; # enable tap to click
+        Clicking = true; # enable tap to click
         TrackpadRightClick = true; # enable two finger right click
       };
 
@@ -67,16 +123,16 @@
         AppleShowAllExtensions = true;
         AppleShowAllFiles = true;
         AppleShowScrollBars = "Always";
-        # "com.apple.swipescrolldirection" = false; # disable natural scrolling
+        "com.apple.swipescrolldirection" = false; # disable natural scrolling
         "com.apple.sound.beep.feedback" = 0; # disable beep sound when pressing volume up/down key
         #AppleInterfaceStyle = "Dark";  # dark mode
 
         # If you press and hold certain keyboard keys when in a text area, the key’s character begins to repeat.
         # This is very useful for vim users, they use `hjkl` to move cursor.
         # sets how long it takes before it starts repeating.
-        # InitialKeyRepeat = 15; # normal minimum is 15 (225 ms), maximum is 120 (1800 ms)
+        InitialKeyRepeat = 15; # normal minimum is 15 (225 ms), maximum is 120 (1800 ms)
         # sets how fast it repeats once it starts.
-        # KeyRepeat = 3; # normal minimum is 2 (30 ms), maximum is 120 (1800 ms)
+        KeyRepeat = 3; # normal minimum is 2 (30 ms), maximum is 120 (1800 ms)
 
         NSAutomaticCapitalizationEnabled = false; # disable auto capitalization
         NSAutomaticDashSubstitutionEnabled = false; # disable auto dash substitution
@@ -121,10 +177,51 @@
           FXEnableExtensionChangeWarning = false;
         };
 
+        #need full disk access to the terminal app - kitty
+        "com.apple.Safari" = {
+          # Privacy: don’t send search queries to Apple
+          UniversalSearchEnabled = false;
+          SuppressSearchSuggestions = true;
+          # Press Tab to highlight each item on a web page
+          WebKitTabToLinksPreferenceKey = true;
+          ShowFullURLInSmartSearchField = true;
+          # Prevent Safari from opening ‘safe’ files automatically after downloading
+          AutoOpenSafeDownloads = false;
+          ShowFavoritesBar = false;
+          IncludeInternalDebugMenu = false;
+          IncludeDevelopMenu = false;
+          WebKitDeveloperExtrasEnabledPreferenceKey = true;
+          WebContinuousSpellCheckingEnabled = true;
+          WebAutomaticSpellingCorrectionEnabled = false;
+          AutoFillFromAddressBook = false;
+          AutoFillCreditCardData = false;
+          AutoFillMiscellaneousForms = false;
+          WarnAboutFraudulentWebsites = true;
+          WebKitJavaEnabled = false;
+          WebKitJavaScriptCanOpenWindowsAutomatically = false;
+          "com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks" = true;
+          "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" = true;
+          "com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled" = false;
+          "com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled" = false;
+          "com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabledForLocalFiles" = false;
+          "com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically" = false;
+         };
+
+        "com.apple.mail" = {
+          # Disable inline attachments (just show the icons)
+          DisableInlineAttachmentViewing = true;
+        };
+
         "com.apple.desktopservices" = {
           # Avoid creating .DS_Store files on network or USB volumes
           DSDontWriteNetworkStores = true;
           DSDontWriteUSBStores = true;
+        };
+
+        "com.apple.screensaver" = {
+          # Require password immediately after sleep or screen saver begins
+          askForPassword = 1;
+          askForPasswordDelay = 0;
         };
 
         "com.apple.SoftwareUpdate" = {
@@ -176,12 +273,30 @@
   environment.shells = [
     pkgs.zsh
   ];
-  /* programs.zsh.shellInit = ''
-    # Nix
-    if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-      . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-    fi
-    # End Nix
-  ''; */
 
+  # Set your time zone.
+  # comment this due to the issue:
+  #   https://github.com/LnL7/nix-darwin/issues/359
+  # time.timeZone = "Asia/singapore";
+
+  # Fonts
+  fonts = {
+    # will be removed after this PR is merged:
+    #   https://github.com/LnL7/nix-darwin/pull/754
+    fontDir.enable = true;
+
+    # will change to `fonts.packages` after this PR is merged:
+    #   https://github.com/LnL7/nix-darwin/pull/754
+    fonts = with pkgs; [
+
+      # packages = with pkgs; [
+      # nerdfonts
+      (nerdfonts.override {
+        fonts = [
+          "JetBrainsMono"
+        ];
+      })
+
+    ];
+  };
 }
