@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 ###################################################################################
 #
 #  macOS's System configuration
@@ -16,6 +16,13 @@
     # activationScripts are executed every time you boot the system or run `nixos-rebuild` / `darwin-rebuild`.
     activationScripts.postUserActivation.text = ''
     '';
+
+    keyboard =
+      {
+        enableKeyMapping = true;
+        # remap caps lock to escape
+        remapCapsLockToEscape = true;
+      };
 
     defaults = {
 
@@ -38,6 +45,7 @@
         enable-spring-load-actions-on-all-items = true;
         wvous-tr-corner = 10; # top right corner (Hot Corners)
       };
+
 
       # finder
       finder = {
@@ -135,7 +143,7 @@
           AutomaticDownload = 1;
           # Install System data files & security updates
           CriticalUpdateInstall = 1;
-         };
+        };
 
         "com.apple.AdLib" = {
           allowApplePersonalizedAdvertising = false;
@@ -156,6 +164,13 @@
 
         #Show remaining battery percent
         "com.apple.controlcenter.plist".BatteryShowPercentage = true;
+
+        # Disable Siri
+        "com.apple.Siri" = {
+          SiriPrefStashedStatusMenuVisible = 0;
+          StatusMenuVisible = 0;
+          VoiceTriggerUserEnabled = 0;
+        };
 
       };
 
@@ -179,9 +194,9 @@
   /* programs.zsh.shellInit = ''
     # Nix
     if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-      . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+    . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
     fi
     # End Nix
-  ''; */
+    ''; */
 
 }

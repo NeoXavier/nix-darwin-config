@@ -3,7 +3,10 @@
     zsh = {
       enable = true;
       enableCompletion = true;
-      completionInit = "autoload -U compinit && compinit\nsource ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh";
+      completionInit = ''
+        autoload -Uz compinit && compinit
+        zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+      '';
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
 
@@ -25,6 +28,7 @@
       # Homebrew path for Apple Silicon and Intel Macs
       envExtra = ''
         export PATH="$PATH:/opt/homebrew/bin:/usr/local/bin"
+        export PATH="/opt/homebrew/opt/mysql@8.0/bin:$PATH"
       '';
 
       initExtra = ''
@@ -45,14 +49,16 @@
 
         # PyEnv Configuration
         # export PATH="~/.pyenv/bin:$PATH" (for linux)
-        # export PYENV_ROOT="$HOME/.pyenv"
-        # export PATH="$PYENV_ROOT/bin:$PATH"
-        # eval "$(pyenv init --path)"
-        # eval "$(pyenv virtualenv-init -)"
+        export PYENV_ROOT="$HOME/.pyenv"
+        [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+        eval "$(pyenv init --path)"
+        eval "$(pyenv init -)"
+        eval "$(pyenv virtualenv-init -)"
+        export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
-        #if which pyenv-virtualenv-init > /dev/null; then
-        #eval "$(pyenv virtualenv-init -)";
-        #fi
+        # if which pyenv-virtualenv-init > /dev/null; then
+        # eval "$(pyenv virtualenv-init -)";
+        # fi
 
         # >>> conda initialize >>>
         # !! Contents within this block are managed by 'conda init' !!
@@ -72,8 +78,8 @@
 
       shellAliases = {
         yoink = "open -a Yoink";
-        # vim = "/etc/profiles/per-user/xavier/bin/nvim";
-        vim = "/opt/homebrew/bin/nvim";
+        vim = "/etc/profiles/per-user/xavier/bin/nvim";
+        # vim = "/opt/homebrew/bin/nvim";
         vimrc = "nvim ~/.config/nvim";
         zshrc = "vim ~/.zshrc";
         rezsh = "exec zsh";
@@ -110,7 +116,7 @@
         bind-key C-a send-prefix
         set -g status-style 'bg=#333333 fg=#5eacd3'
 
-        bind r source-file ~/.tmux.conf
+        bind r source-file ~/.config/tmux/tmux.conf
         set -g base-index 1
 
         # split panes using | and -
@@ -132,6 +138,9 @@
         bind c new-window -c "#{pane_current_path}"
 
         bind-key -r f run-shell "tmux neww ~/.local/bin/tmux-sessionizer"
+
+        set -gq allow-passthrough on
+        set -g visual-activity off
       '';
     };
 

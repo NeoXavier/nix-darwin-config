@@ -47,17 +47,20 @@
       #"homebrew/cask-fonts"
       #"homebrew/services"
       #"homebrew/cask-versions"
-      "koekeishiya/formulae" # yabai
       "nikitabobko/tap"
       "osx-cross/avr"
+      "osx-cross/arm"
     ];
 
     # `brew install`
     brews = [
       "curl" # do not install curl via nixpkgs, it's not working well on macOS!
-      "neovim"
-      "qmk/qmk/qmk"
+      # "neovim"
       #"watchman"
+      "pyenv"
+      "pyenv-virtualenv"
+      "gettext"
+      "mysql@8.0" # If removing this, also remove it from path in zshrc
     ];
 
     # `brew install --cask`
@@ -72,13 +75,16 @@
       "slack"
       "qmk-toolbox"
       "protonvpn"
+      "jordanbaird-ice"
+      "zoom"
+      "elmedia-player"
 
       # Productivity
       "alfred"
       "karabiner-elements"
       "fantastical"
-      "spaceid"
       "aerospace"
+      "chatgpt"
 
       # Messaging apps
       "signal"
@@ -92,6 +98,7 @@
       # Development
       "alacritty"
       "iterm2"
+      "ghostty"
       "vmware-fusion"
       "visual-studio-code"
 
@@ -101,6 +108,7 @@
       "microsoft-outlook"
       "microsoft-word"
       "microsoft-onenote"
+      "microsoft-teams"
     ];
   };
 }

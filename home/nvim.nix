@@ -1,39 +1,51 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }: {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
+    withPython3 = true;
+    extraPackages = with pkgs; [
+      shfmt
+      ripgrep
+      unzip
+
+      # Used for treesitter
+      gcc
+
+      lua-language-server
+      stylua
+      selene
+
+      python311Packages.python-lsp-server
+
+      nodePackages.typescript-language-server
+
+      nil
+      alejandra
+      wl-clipboard
+
+      imagemagick
+    ];
+    extraLuaPackages = ps: with ps; [
+      magick # for image rendering
+    ];
+    # extraPython3Packages = ps: with ps; [
+    #   pynvim
+    #   jupyter-client
+    #   cairosvg # for image rendering
+    #   pnglatex # for image rendering
+    #   plotly # for image rendering
+    #   pyperclip
+    # ];
   };
 
-  xdg.configFile."nvim" = {
-    source = ../config/nvim;
-    recursive = true;
-  };
-
-  programs.neovim.extraPackages = with pkgs; [
-    shfmt
-    ripgrep
-    unzip
-
-    # Used for treesitter
-    gcc
-
-    lua-language-server
-    stylua
-    selene
-
-    python311Packages.python-lsp-server
-
-    nodePackages.typescript-language-server
-
-    nil
-    alejandra
-    wl-clipboard
-  ];
+  # xdg.configFile."nvim" = {
+  #   source = ../config/nvim;
+  #   recursive = true;
+  # };
 
   home.packages = with pkgs; [
     (writeShellScriptBin "clean-nvim" ''
@@ -47,5 +59,7 @@
       rm -rf ${config.xdg.cacheHome}/nvim
       rm -rf ${config.xdg.configHome}/nvim
     '')
+
+
   ];
 }

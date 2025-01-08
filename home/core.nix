@@ -1,15 +1,16 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: let
+{ pkgs
+, inputs
+, ...
+}:
+let
   # Nixvim
   nixvimconfig = import ./nixvim;
   nixvim = inputs.nixvim.legacyPackages.aarch64-darwin.makeNixvimWithModule {
     inherit pkgs;
     module = nixvimconfig;
   };
-in {
+in
+{
   home.packages = with pkgs; [
     # archives
     zip
@@ -31,13 +32,14 @@ in {
     alejandra
 
     tree
-    pyenv
     autojump
     nodejs
+    lazygit
 
     # nixvim
 
     # node packages
+    nodePackages.live-server
   ];
 
   programs = {

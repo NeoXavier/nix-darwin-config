@@ -11,8 +11,9 @@ in {
     ./core.nix
     ./git.nix
     ./alacritty.nix
+    ./kitty.nix
     ./shell.nix
-    # ./nvim.nix
+    ./nvim.nix
     ./starship.nix
   ];
 

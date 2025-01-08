@@ -135,7 +135,7 @@
       python = {
         symbol = "";
         style = "bg:color_blue";
-        format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
+        format = "[[ $symbol( $version) \($virtualenv\)](fg:color_fg0 bg:color_blue)]($style)";
       };
 
       docker_context = {

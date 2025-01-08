@@ -24,57 +24,59 @@
     };
   };
 
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    darwin,
-    home-manager,
-    ...
-  }: {
-    darwinConfigurations = let
-      user = "xavier";
-    in {
-      "xavier-aarch64" = darwin.lib.darwinSystem {
-        system = "aarch64-darwin"; # change this to "aarch64-darwin" if you are using Apple Silicon
-        modules = [
-          ./modules/nix-core.nix
-          ./modules/apps.nix
-          ./modules/system.nix
-          # ./modules/dock.nix
+  outputs =
+    inputs @ { self
+    , nixpkgs
+    , darwin
+    , home-manager
+    , ...
+    }: {
+      darwinConfigurations =
+        let
+          user = "xavier";
+        in
+        {
+          "xavier-aarch64" = darwin.lib.darwinSystem {
+            system = "aarch64-darwin"; # change this to "aarch64-darwin" if you are using Apple Silicon
+            modules = [
+              ./modules/nix-core.nix
+              ./modules/apps.nix
+              ./modules/system.nix
+              # ./modules/dock.nix
 
-          # home manager
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
+              # home manager
+              home-manager.darwinModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
 
-            home-manager.extraSpecialArgs = {inherit inputs;};
-            home-manager.users.${user} = import ./home;
-          }
-        ];
-      };
-      "xavier-x86" = darwin.lib.darwinSystem {
-        system = "x86_64-darwin"; # change this to "aarch64-darwin" if you are using Apple Silicon
-        modules = [
-          ./modules/nix-core.nix
-          ./modules/apps.nix
-          ./modules/system.nix
-          # ./modules/dock.nix
+                home-manager.extraSpecialArgs = { inherit inputs; };
+                home-manager.users.${user} = import ./home;
+              }
+            ];
+          };
+          "xavier-x86" = darwin.lib.darwinSystem {
+            system = "x86_64-darwin"; # change this to "aarch64-darwin" if you are using Apple Silicon
+            modules = [
+              ./modules/nix-core.nix
+              ./modules/apps.nix
+              ./modules/system.nix
+              # ./modules/dock.nix
 
-          # home manager
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
+              # home manager
+              home-manager.darwinModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
 
-            home-manager.extraSpecialArgs = {inherit inputs;};
-            home-manager.users.${user} = import ./home;
-          }
-        ];
-      };
+                home-manager.extraSpecialArgs = { inherit inputs; };
+                home-manager.users.${user} = import ./home;
+              }
+            ];
+          };
+        };
+      # nix code formatter
+      formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.alejandra;
+      formatter.x86_64-darwin = nixpkgs.legacyPackages.x86_64-darwin.alejandra;
     };
-    # nix code formatter
-    formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.alejandra;
-    formatter.x86_64-darwin = nixpkgs.legacyPackages.x86_64-darwin.alejandra;
-  };
 }
