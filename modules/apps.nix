@@ -1,7 +1,67 @@
 { config
 , pkgs
+, inputs
+, currentSystem
 , ...
-}: {
+}:
+let
+  minimal = [
+    "font-jetbrains-mono-nerd-font"
+    "1password"
+    "1password-cli"
+    "obsidian"
+    "spotify"
+    "protonvpn"
+    "jordanbaird-ice"
+
+    # Productivity
+    "alfred"
+    "karabiner-elements"
+    "fantastical"
+    "aerospace"
+
+    # Browsers
+    "firefox"
+    "google-chrome"
+
+    # Development
+    "ghostty"
+
+  ];
+
+  full = minimal ++ [
+    "setapp"
+    "slack"
+    "qmk-toolbox"
+    "zoom"
+    "elmedia-player"
+
+    # Productivity
+    "chatgpt"
+
+    # Messaging apps
+    "signal"
+    "telegram"
+    "whatsapp"
+
+    # Development
+    "alacritty"
+    "iterm2"
+    "vmware-fusion"
+    "visual-studio-code"
+
+    # Microsft Office
+    "microsoft-excel"
+    "microsoft-powerpoint"
+    "microsoft-outlook"
+    "microsoft-word"
+    "microsoft-onenote"
+    "microsoft-teams"
+  ];
+
+    casks = if currentSystem == "aarch64-darwin" then full else minimal;
+in
+{
   # Related Discussion: https://discourse.nixos.org/t/darwin-again/29331
   environment.systemPackages = with pkgs; [
     # utils
@@ -9,6 +69,7 @@
     # misc
     pyenv
   ];
+  # ++ [ inputs.ghostty.packages.aarch64-darwin.default ]; (waiting for ghostty flake to suppor nix-darwin)
   environment.variables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
@@ -65,50 +126,6 @@
 
     # `brew install --cask`
     # TODO Feel free to add your favorite apps here.
-    casks = [
-      "font-jetbrains-mono-nerd-font"
-      "1password"
-      "1password-cli"
-      "setapp"
-      "obsidian"
-      "spotify"
-      "slack"
-      "qmk-toolbox"
-      "protonvpn"
-      "jordanbaird-ice"
-      "zoom"
-      "elmedia-player"
-
-      # Productivity
-      "alfred"
-      "karabiner-elements"
-      "fantastical"
-      "aerospace"
-      "chatgpt"
-
-      # Messaging apps
-      "signal"
-      "telegram"
-      "whatsapp"
-
-      # Browsers
-      "firefox"
-      "google-chrome"
-
-      # Development
-      "alacritty"
-      "iterm2"
-      "ghostty"
-      "vmware-fusion"
-      "visual-studio-code"
-
-      # Microsft Office
-      "microsoft-excel"
-      "microsoft-powerpoint"
-      "microsoft-outlook"
-      "microsoft-word"
-      "microsoft-onenote"
-      "microsoft-teams"
-    ];
+    casks = casks;
   };
 }

@@ -1,0 +1,9 @@
+font-family = "JetBrainsMono Nerd Font Mono"
+font-size = "14"
+theme = "Snazzy"
+shell-integration-features = no-cursor
+cursor-style = "block"
+background-opacity = 0.85
+title = " "
+macos-titlebar-style = "hidden"
+keybind = global:cmd+t=toggle_quick_terminal

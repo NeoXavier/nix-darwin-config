@@ -7,7 +7,6 @@
 in {
   # import sub modules
   imports = [
-    inputs.nixvim.homeManagerModules.nixvim
     ./core.nix
     ./git.nix
     ./alacritty.nix
@@ -24,7 +23,9 @@ in {
     homeDirectory = lib.mkForce "/Users/${user}";
     stateVersion = "23.11";
 
+    # Rawdog config files (for packages with no Home Manager support)
     file.".config/aerospace/aerospace.toml".source = ../config/aerospace/aerospace.toml;
+    file.".config/ghostty/config".source = ../config/ghostty/config;
   };
 
   # Let Home Manager install and manage itself.

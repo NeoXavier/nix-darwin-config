@@ -2,14 +2,6 @@
 , inputs
 , ...
 }:
-let
-  # Nixvim
-  nixvimconfig = import ./nixvim;
-  nixvim = inputs.nixvim.legacyPackages.aarch64-darwin.makeNixvimWithModule {
-    inherit pkgs;
-    module = nixvimconfig;
-  };
-in
 {
   home.packages = with pkgs; [
     # archives

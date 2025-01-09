@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   programs.kitty = {
     enable = true;
-    theme = "Snazzy";
+    themeFile = "Snazzy";
     keybindings = {
       "super+f" = "launch --type=overlay --stdin-source=@screen_scrollback /bin/sh -c '${pkgs.fzf}'/bin/fzf --no-sort --no-mouse --exact -i --tac | kitty +kitten clipboard";
       "super+." = "set_tab_title";
