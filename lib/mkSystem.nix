@@ -1,8 +1,7 @@
-{  inputs, home-manager, darwin }:
+{ inputs, home-manager, darwin }:
 
-{ system , user }:
-darwin.lib.darwinSystem
-{
+{ system, user }:
+darwin.lib.darwinSystem {
   inherit system;
   modules = [
     ../modules/nix-core.nix

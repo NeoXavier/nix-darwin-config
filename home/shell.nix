@@ -100,6 +100,8 @@
       # Remove delay when pressing escape
       escapeTime = 0;
 
+      sensibleOnTop = false;
+
       plugins = with pkgs; [
         tmuxPlugins.catppuccin
       ];
@@ -111,9 +113,10 @@
         set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
         set-environment -g COLORTERM "truecolor"
 
-        unbind C-b
-        set-option -g prefix C-a
-        bind-key C-a send-prefix
+        # unbind C-b
+        # set-option -g prefix C-a
+        # bind-key C-a send-prefix
+
         set -g status-style 'bg=#333333 fg=#5eacd3'
 
         bind r source-file ~/.config/tmux/tmux.conf
@@ -150,6 +153,6 @@
       nix-direnv.enable = true;
     };
 
-    yazi.enable = true;
+    ranger.enable = true;
   };
 }

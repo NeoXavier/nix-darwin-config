@@ -35,6 +35,9 @@ let
     "qmk-toolbox"
     "zoom"
     "elmedia-player"
+    "daisydisk"
+    "keepingyouawake"
+    "gimp"
 
     # Productivity
     "chatgpt"
