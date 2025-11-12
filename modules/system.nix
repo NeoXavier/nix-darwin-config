@@ -13,9 +13,6 @@
   system = {
     # Introduced in c03f85f for macos Sequoia
     stateVersion = 4;
-    # activationScripts are executed every time you boot the system or run `nixos-rebuild` / `darwin-rebuild`.
-    activationScripts.postUserActivation.text = ''
-    '';
 
     keyboard =
       {
@@ -23,6 +20,8 @@
         # remap caps lock to escape
         remapCapsLockToEscape = true;
       };
+
+    primaryUser = "xavier";
 
     defaults = {
 
@@ -34,7 +33,7 @@
         show-process-indicators = true;
         appswitcher-all-displays = true; # display the appswitcher on all displays or only the main one
         dashboard-in-overlay = true; # hide Dashboard as a Space
-        expose-group-by-app = true; # group windows by application in Mission Control’s Exposé
+        expose-group-apps = true; # group windows by application in Mission Control’s Exposé
         launchanim = false; # Animate opening applications from the Dock
         minimize-to-application = true; # minimize windows into their application icon
         mru-spaces = true; # automatically rearrange spaces based on most recent use

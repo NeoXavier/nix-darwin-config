@@ -17,7 +17,7 @@
     # gnused
     # gnutar
     # gawk
-    # go
+    go
     gnupg
     zsh-fzf-tab
     php

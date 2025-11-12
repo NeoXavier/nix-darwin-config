@@ -14,6 +14,7 @@
 
       # Used for treesitter
       gcc
+      tree-sitter
 
       lua-language-server
       stylua
@@ -42,6 +43,7 @@
     # ];
   };
 
+# Copy neovim config to config path (uncomment when config is ready to use)
   # xdg.configFile."nvim" = {
   #   source = ../config/nvim;
   #   recursive = true;

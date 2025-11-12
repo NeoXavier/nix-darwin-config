@@ -52,6 +52,7 @@ let
     "iterm2"
     "vmware-fusion"
     "visual-studio-code"
+    "mactex"
 
     # Microsft Office
     "microsoft-excel"
@@ -125,6 +126,7 @@ in
       "pyenv-virtualenv"
       "gettext"
       "mysql@8.0" # If removing this, also remove it from path in zshrc
+      "ranger"
     ];
 
     # `brew install --cask`
