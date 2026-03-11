@@ -2,6 +2,31 @@ require("set")
 require("remap")
 require("config.lazy_init")
 
+if vim.g.vscode then
+    -- VSCode
+    require("remap_vscode")
+else
+    -- Normal Neovim
+    require("remap_nvim")
+end
+
+
+require("lazy").setup({
+    spec = {
+        {
+            import = "plugins.shared"
+        },
+        {
+            import = "plugins.ide",
+            cond = function()
+                return not vim.g.vscode
+            end
+        }
+    },
+    change_detection = { notify = false }
+})
+
+
 local augroup = vim.api.nvim_create_augroup
 local XavierGroup = augroup('Xavier', {})
 
@@ -23,7 +48,7 @@ autocmd('TextYankPost', {
     end,
 })
 
-autocmd({"BufWritePre"}, {
+autocmd({ "BufWritePre" }, {
     group = XavierGroup,
     pattern = "*",
     command = [[%s/\s\+$//e]],
@@ -51,4 +76,3 @@ vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 
 vim.g.python3_host_prog = '/Users/xavier/.pyenv/versions/3.11.0/envs/nvim/bin/python'
-

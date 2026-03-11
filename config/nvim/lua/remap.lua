@@ -1,3 +1,5 @@
+-- Universal remaps for general vim motions
+
 -- Page up and down while cursor remains at the center
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
@@ -31,39 +33,20 @@ vim.keymap.set("n", "Q", "<nop>")
 -- Replace current word
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
--- Formatting
---vim.keymap.set("n", "<leader>f", "<cmd>LspZeroFormat<CR>")
---vim.keymap.set("v", "<leader>f", "<cmd>LspZeroFormat<CR>")
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
-vim.keymap.set("v", "<leader>f", vim.lsp.buf.format)
-
--- Split windows
-vim.keymap.set("n", "<C-w><Bar>", ":vsplit<CR>")
-vim.keymap.set("n", "<C-w>_", ":split<CR>")
-
--- Jump buffers
-vim.keymap.set("n", "<leader><Tab>", "<cmd>bn<CR>")
-vim.keymap.set("n", "<leader><S-Tab>", "<cmd>bp<CR>")
-vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<CR>")
-
--- Move cursor in insert mode
--- vim.keymap.set("i", "<C-l>", "<Right>")
--- vim.keymap.set("i", "<C-h>", "<Left>")
-
--- Open netrw
-vim.keymap.set("n", "<leader>o", vim.cmd.Ex)
-
---Fugitive
-vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
-
--- Undo tree
-vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
-
 -- Quickfix navigation
 vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
 
--- Symbols Outline
-vim.keymap.set("n", "<leader>so", vim.cmd.SymbolsOutline)
+-- Formatting
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+vim.keymap.set("v", "<leader>f", vim.lsp.buf.format)
+
+-- Open netrw
+vim.keymap.set("n", "<leader>o", vim.cmd.Ex)
+
+
+-- Move cursor in insert mode
+-- vim.keymap.set("i", "<C-l>", "<Right>")
+-- vim.keymap.set("i", "<C-h>", "<Left>")
 
 

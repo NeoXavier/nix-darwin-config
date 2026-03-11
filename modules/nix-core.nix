@@ -12,6 +12,7 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnsupportedSystem = true;
 
   # Auto upgrade nix package and the daemon service.
   # services.nix-daemon.enable = true; # nix-darwin now manages nix-daemon unconditionally

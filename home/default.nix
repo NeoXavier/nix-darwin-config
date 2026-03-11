@@ -21,7 +21,7 @@ in {
   home = {
     username = "${user}";
     homeDirectory = lib.mkForce "/Users/${user}";
-    stateVersion = "23.11";
+    stateVersion = "25.05";
 
     # Rawdog config files (for packages with no Home Manager support)
     file.".config/aerospace/aerospace.toml".source = ../config/aerospace/aerospace.toml;
