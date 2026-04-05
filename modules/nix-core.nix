@@ -10,8 +10,9 @@
     nix-path = config.nix.nixPath;
   };
 
-  # Allow unfree packages
+  # Allow unfree packages (non open source)
   nixpkgs.config.allowUnfree = true;
+  # Allow unsupported system (e.g. aarch64-darwin on a x86 system).
   nixpkgs.config.allowUnsupportedSystem = true;
 
   # Auto upgrade nix package and the daemon service.
@@ -20,7 +21,9 @@
   # don't wan't the daemon service to be managed for you.
   # nix.useDaemon = true;
 
-  nix.package = pkgs.nix;
+  # If you want to explicitely declare the nix package to be used, you can do it here. By default, nix-darwin will use the latest version of nix from nixpkgs.
+  # Remove if you are using determinate Nix as that is managed outside of the config.
+  # nix.package = pkgs.nix;
 
   # do garbage collection weekly to keep disk usage low
   nix.gc = {
