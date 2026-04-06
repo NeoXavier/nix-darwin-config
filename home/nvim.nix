@@ -20,18 +20,17 @@
       stylua
       selene
 
-      python311Packages.python-lsp-server
+      # python311Packages.python-lsp-server
 
-      nodePackages.typescript-language-server
+      # nodePackages.typescript-language-server
 
       nil
       alejandra
-      wl-clipboard
 
-      imagemagick
+      # imagemagick
     ];
     extraLuaPackages = ps: with ps; [
-      magick # for image rendering
+      # magick # for image rendering
     ];
     # extraPython3Packages = ps: with ps; [
     #   pynvim

@@ -1,13 +1,14 @@
 { pkgs, ... }: {
-  home.file = {
-    ".local/bin/op-api-keys" = {
-      text = ''
-        # API key for ChatGPT
-        export OPENAI_API_KEY="$(op read "op://private/ChatGPT API Key/text")"
-      '';
-      executable = true;
-    };
+  # home.file = {
+  #   ".local/bin/op-api-keys" = {
+  #     text = ''
+  #       # API key for ChatGPT
+  #       export OPENAI_API_KEY="$(op read "op://private/ChatGPT API Key/text")"
+  #     '';
+  #     executable = true;
+  #   };
 
+  home.file = {
     ".local/bin/tmux-sessionizer" = {
       text = ''
         #!/usr/bin/env bash
@@ -15,7 +16,7 @@
         if [[ $# -eq 1 ]]; then
             selected=$1
         else
-            selected=$(find ~/Uol_CS\(Local\)/modules ~/projects -mindepth 1 -maxdepth 1 -type d | fzf)
+            selected=$(find ~/dev -mindepth 1 -maxdepth 1 -type d | fzf)
         fi
 
         if [[ -z $selected ]]; then
@@ -48,6 +49,52 @@
       executable = true;
     };
 
+    ".local/bin/agentic-workspace-tmux" = {
+      source = pkgs.writeShellScript "agentic-workspace-tmux" ''
+        #!/usr/bin/env bash
+
+        set -euo pipefail
+
+        SESSION_NAME="agentic"
+
+        WINDOWS=(agentic-soc agentic-soc-infra triage-agent job-enhancement-backend job-enhancement-frontend embedding-service)
+
+        DIRS=(
+          "$HOME/dev/agentic/agentic_soc"
+          "$HOME/dev/agentic/agentic_soc_infra"
+          "$HOME/dev/agentic/triage_agent"
+          "$HOME/dev/agentic/job-enhancement-backend"
+          "$HOME/dev/agentic/job-enhancement-frontend"
+          "$HOME/dev/agentic/embedding_service"
+        )
+
+        if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
+          exec tmux attach -t "$SESSION_NAME"
+        fi
+
+        tmux new-session -d -s "$SESSION_NAME" -n "''${WINDOWS[0]}" -c "''${DIRS[0]}"
+
+        for i in "''${!WINDOWS[@]}"; do
+          if [ "$i" -eq 0 ]; then
+            continue
+          fi
+
+          tmux new-window -t "$SESSION_NAME:$((i+1))" -n "''${WINDOWS[$i]}" -c "''${DIRS[$i]}"
+        done
+
+        # for i in "''${!WINDOWS[@]}"; do
+        #   if [ -n "''${CMDS[$i]}" ]; then
+        #     tmux send-keys -t "$SESSION_NAME:''${WINDOWS[$i]}" "''${CMDS[$i]}" C-m
+        #   fi
+        # done
+
+        tmux select-window -t "$SESSION_NAME":1
+        exec tmux attach -t "$SESSION_NAME"
+      '';
+      executable = true;
+    };
+
+
     ".config/tmux/plugins/catppuccin/tmux" = {
       source = pkgs.fetchFromGitHub {
       owner = "catppuccin";
@@ -72,9 +119,7 @@
 
       # Homebrew path for Apple Silicon and Intel Macs
       envExtra = ''
-        export PATH="$PATH:/opt/homebrew/bin:/usr/local/bin"
-        export PATH="/opt/homebrew/opt/mysql@8.0/bin:$PATH"
-        export PATH="/Library/TeX/texbin:$PATH"
+        export PATH="$PATH:/opt/homebrew/bin"
       '';
 
       initContent = ''
@@ -83,43 +128,12 @@
 
          #Shotcuts
          j() {
-             cd "$(cat /Users/xavier/Library/autojump/autojump.txt | cut -f2 | sed 's|^/||' | fzf | sed 's|^|/|')"
-         }
+            cd "$(cat /Users/xavier_neo/Library/autojump/autojump.txt | cut -f2 | sed 's|^/||' | fzf | sed 's|^|/|')"
+        }
+
 
          # Starship
         eval "$(starship init zsh)"
-
-
-         # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-         #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-         # PyEnv Configuration
-         # export PATH="~/.pyenv/bin:$PATH" (for linux)
-         export PYENV_ROOT="$HOME/.pyenv"
-         [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-         eval "$(pyenv init --path)"
-         eval "$(pyenv init -)"
-         eval "$(pyenv virtualenv-init -)"
-         export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-
-         # if which pyenv-virtualenv-init > /dev/null; then
-         # eval "$(pyenv virtualenv-init -)";
-         # fi
-
-         # >>> conda initialize >>>
-         # !! Contents within this block are managed by 'conda init' !!
-           __conda_setup="$('/Users/xavier/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-           if [ $? -eq 0 ]; then
-           eval "$__conda_setup"
-           else
-           if [ -f "/Users/xavier/anaconda3/etc/profile.d/conda.sh" ]; then
-           . "/Users/xavier/anaconda3/etc/profile.d/conda.sh"
-           else
-           export PATH="/Users/xavier/anaconda3/bin:$PATH"
-           fi
-           fi
-           unset __conda_setup
-         # <<< conda initialize <<<
       '';
 
       shellAliases = {
@@ -129,12 +143,10 @@
         vimrc = "nvim ~/.config/nvim";
         zshrc = "vim ~/.zshrc";
         rezsh = "exec zsh";
-        dot = "/usr/bin/git --git-dir=/Users/xavier/.cfg --work-tree=/Users/xavier";
         tma = "tmux attach -t";
         tls = "tmux list-sessions";
         ts = "~/.local/bin/tmux-sessionizer";
-        yz = "yazi";
-        lk = "~/.local/bin/op-api-keys";
+        agentic = "~/.local/bin/agentic-workspace-tmux";
       };
     };
 
@@ -155,9 +167,11 @@
         set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
         set-environment -g COLORTERM "truecolor"
 
-        # unbind C-b
-        # set-option -g prefix C-a
-        # bind-key C-a send-prefix
+        # Turn off automatic window renaming from tmux (e.g.) when you run vim, it changes the window name to the file you're editing
+        #and set the window title to the current command
+        set -g automatic-rename off
+        set -g @catppuccin_window_text "#W"
+        set -g @catppuccin_window_current_text "#W"
 
         # Styling
         # set -g status-style 'bg=#333333 fg=#5eacd3' # blue text for default status bar
@@ -173,6 +187,9 @@
         set -g status-right "#{E:@catppuccin_status_application}"
         set -ag status-right "#{E:@catppuccin_status_session}"
         set -ag status-right "#{E:@catppuccin_status_host}"
+
+        # don't rename windows automatically from apps
+        set-option -g allow-rename off
 
         bind r source-file ~/.config/tmux/tmux.conf
         set -g base-index 1
@@ -190,9 +207,6 @@
         bind -r h select-pane -L
         bind -r l select-pane -R
 
-        # don't rename windows automatically
-        set-option -g allow-rename off
-
         bind c new-window -c "#{pane_current_path}"
 
         bind-key -r f run-shell "tmux neww ~/.local/bin/tmux-sessionizer"
@@ -206,19 +220,6 @@
       enable = true;
       enableZshIntegration = true;
       nix-direnv.enable = true;
-    };
-
-    ranger = {
-      enable = true;
-      settings = {
-        preview_images_method = "kitty";
-      };
-      rifle = [
-          {
-            condition = "ext pdf|docx|epub|cb[rz], has zathura, X, flag f";
-            command = ''${pkgs.zathura}/bin/zathura -- "$@"'';
-          }
-      ];
     };
   };
 }

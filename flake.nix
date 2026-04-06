@@ -24,7 +24,7 @@
 
   outputs =
     inputs @ { self
-    , nixpkgs
+    , nixpkgs-darwin
     , darwin
     , home-manager
     , ...
@@ -37,14 +37,9 @@
     {
       darwinConfigurations.xavier-aarch64 = mkSystem {
         system = "aarch64-darwin";
-        user = "xavier";
-      };
-      darwinConfigurations.xavier-x86 = mkSystem {
-        system = "x86_64-darwin";
-        user = "xavier";
+        user = "xavier_neo";
       };
       # nix code formatter
-      formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.alejandra;
-      formatter.x86_64-darwin = nixpkgs.legacyPackages.x86_64-darwin.alejandra;
+      formatter.aarch64-darwin = nixpkgs-darwin.legacyPackages.aarch64-darwin.alejandra;
     };
 }

@@ -6,18 +6,14 @@
 }:
 let
   minimal = [
-    "font-jetbrains-mono-nerd-font"
     "1password"
     "1password-cli"
     "obsidian"
-    "spotify"
-    "protonvpn"
     "jordanbaird-ice"
 
     # Productivity
     "alfred"
     "karabiner-elements"
-    "fantastical"
     "aerospace"
 
     # Browsers
@@ -27,6 +23,13 @@ let
     # Development
     "ghostty"
 
+    # Messaging apps
+    "telegram"
+    "whatsapp"
+    "microsoft-teams"
+
+    # AI
+    "cursor"
   ];
 
   full = minimal ++ [
@@ -44,8 +47,6 @@ let
 
     # Messaging apps
     "signal"
-    "telegram"
-    "whatsapp"
 
     # Development
     "alacritty"
@@ -60,10 +61,9 @@ let
     "microsoft-outlook"
     "microsoft-word"
     "microsoft-onenote"
-    "microsoft-teams"
   ];
 
-    casks = if currentSystem == "aarch64-darwin" then full else minimal;
+    casks = minimal;
 in
 {
   # Related Discussion: https://discourse.nixos.org/t/darwin-again/29331
@@ -122,11 +122,11 @@ in
       "curl" # do not install curl via nixpkgs, it's not working well on macOS!
       # "neovim"
       #"watchman"
-      "pyenv"
-      "pyenv-virtualenv"
-      "gettext"
-      "mysql@8.0" # If removing this, also remove it from path in zshrc
-      "ranger"
+      # "pyenv"
+      # "pyenv-virtualenv"
+      # "gettext"
+      # "mysql@8.0" # If removing this, also remove it from path in zshrc
+      # "ranger"
     ];
 
     # `brew install --cask`
