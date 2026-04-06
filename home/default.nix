@@ -3,14 +3,14 @@
   inputs,
   ...
 }: let
-  user = "xavier";
+  user = "xavier_neo";
 in {
   # import sub modules
   imports = [
     ./core.nix
     ./git.nix
-    ./alacritty.nix
-    ./kitty.nix
+    # ./alacritty.nix
+    # ./kitty.nix
     ./shell.nix
     ./nvim.nix
     ./starship.nix

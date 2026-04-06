@@ -20,7 +20,7 @@
     go
     gnupg
     zsh-fzf-tab
-    php
+    # php
     alejandra
 
     tree

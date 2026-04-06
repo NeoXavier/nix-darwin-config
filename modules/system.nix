@@ -21,7 +21,7 @@
         remapCapsLockToEscape = true;
       };
 
-    primaryUser = "xavier";
+    primaryUser = "xavier_neo";
 
     defaults = {
 

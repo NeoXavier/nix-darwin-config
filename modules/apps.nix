@@ -6,7 +6,6 @@
 }:
 let
   minimal = [
-    "font-jetbrains-mono-nerd-font"
     "1password"
     "1password-cli"
     "obsidian"
@@ -14,7 +13,6 @@ let
     # Productivity
     "alfred"
     "karabiner-elements"
-    "fantastical"
     "aerospace"
 
     # Browsers
@@ -54,8 +52,6 @@ let
 
     # Messaging apps
     "signal"
-    "telegram"
-    "whatsapp"
 
     # Development
     "alacritty"
@@ -70,10 +66,9 @@ let
     "microsoft-outlook"
     "microsoft-word"
     "microsoft-onenote"
-    "microsoft-teams"
   ];
 
-    casks = if currentSystem == "aarch64-darwin" then full else minimal;
+    casks = minimal;
 in
 {
   # Related Discussion: https://discourse.nixos.org/t/darwin-again/29331
@@ -134,11 +129,11 @@ in
       "herdr"
       # "neovim"
       #"watchman"
-      "pyenv"
-      "pyenv-virtualenv"
-      "gettext"
-      "mysql@8.0" # If removing this, also remove it from path in zshrc
-      "ranger"
+      # "pyenv"
+      # "pyenv-virtualenv"
+      # "gettext"
+      # "mysql@8.0" # If removing this, also remove it from path in zshrc
+      # "ranger"
     ];
 
     # `brew install --cask`
