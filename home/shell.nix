@@ -138,7 +138,7 @@
 
       shellAliases = {
         yoink = "open -a Yoink";
-        vim = "/etc/profiles/per-user/xavier/bin/nvim";
+        # vim = "/etc/profiles/per-user/xavier/bin/nvim";
         # vim = "/opt/homebrew/bin/nvim";
         vimrc = "nvim ~/.config/nvim";
         zshrc = "vim ~/.zshrc";
