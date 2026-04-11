@@ -32,6 +32,9 @@
 
     # node packages
     nodePackages.live-server
+
+    # python
+    uv
   ];
 
   programs = {
