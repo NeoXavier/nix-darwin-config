@@ -147,6 +147,7 @@
         tls = "tmux list-sessions";
         ts = "~/.local/bin/tmux-sessionizer";
         agentic = "~/.local/bin/agentic-workspace-tmux";
+        lg = "lazygit";
       };
     };
 
