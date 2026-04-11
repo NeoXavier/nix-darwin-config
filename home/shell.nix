@@ -135,6 +135,8 @@
         ts = "~/.local/bin/tmux-sessionizer";
         yz = "yazi";
         lk = "~/.local/bin/op-api-keys";
+        agentic = "~/.local/bin/agentic-workspace-tmux";
+        lg = "lazygit";
       };
     };
 
