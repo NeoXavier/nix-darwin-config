@@ -7,6 +7,7 @@
     enable = true;
     defaultEditor = true;
     withPython3 = true;
+    vimAlias = true;
     extraPackages = with pkgs; [
       shfmt
       ripgrep
