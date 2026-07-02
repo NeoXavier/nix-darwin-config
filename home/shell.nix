@@ -72,9 +72,7 @@
 
       # Homebrew path for Apple Silicon and Intel Macs
       envExtra = ''
-        export PATH="$PATH:/opt/homebrew/bin:/usr/local/bin"
-        export PATH="/opt/homebrew/opt/mysql@8.0/bin:$PATH"
-        export PATH="/Library/TeX/texbin:$PATH"
+        export PATH="$PATH:/opt/homebrew/bin:/usr/local/bin":
       '';
 
       initContent = ''

@@ -7,7 +7,9 @@
     enable = true;
     defaultEditor = true;
     withPython3 = true;
+    withRuby = false;
     vimAlias = true;
+    sideloadInitLua = true; # never touch ~/.config/nvim/init.lua, user manages it directly
     extraPackages = with pkgs; [
       shfmt
       ripgrep

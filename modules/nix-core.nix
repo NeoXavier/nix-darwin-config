@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }: {
   # enable flakes globally
@@ -9,6 +10,8 @@
     experimental-features = ["nix-command" "flakes"];
     nix-path = config.nix.nixPath;
   };
+
+  nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
 
   # Allow unfree packages (non open source)
   nixpkgs.config.allowUnfree = true;

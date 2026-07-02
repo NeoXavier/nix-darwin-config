@@ -10,9 +10,6 @@ let
     "1password"
     "1password-cli"
     "obsidian"
-    "spotify"
-    "protonvpn"
-    "jordanbaird-ice"
 
     # Productivity
     "alfred"
@@ -27,6 +24,19 @@ let
     # Development
     "ghostty"
 
+    # Messaging apps
+    "telegram"
+    "whatsapp"
+    "microsoft-teams"
+
+    # AI
+    "cursor"
+    "claude"
+    "claude-code@latest"
+
+    # Utilities
+    "stats"
+    "thaw"
   ];
 
   full = minimal ++ [
@@ -120,6 +130,8 @@ in
     # `brew install`
     brews = [
       "curl" # do not install curl via nixpkgs, it's not working well on macOS!
+      "apfel"
+      "herdr"
       # "neovim"
       #"watchman"
       "pyenv"
